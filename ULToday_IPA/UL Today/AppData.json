@@ -1,0 +1,158 @@
+{
+    "version": 2,
+    "description": "global data storage object.",
+    "default_url": "http://www.ul.ie",
+    "campus_map": [
+                   {
+                   "loc": "52.673163, -8.577807",
+                   "name": "Schuman Building (S)",
+                   "code": "s"
+                   },
+                   {
+                   "loc": "52.672685, -8.577163",
+                   "name": "Kemmy Business School (KBS)",
+                   "code": "kbs"
+                   },
+                   {
+                   "loc": "52.673856, -8.575232",
+                   "name": "Computer Science Building (CS)",
+                   "code": "cs"
+                   },
+                   {
+                   "loc": "52.673303, -8.573484",
+                   "name": "Glucksman Library (GL)",
+                   "code": "gl"
+                   },
+                   {
+                   "loc": "52.674240, -8.573167",
+                   "name": "The Foundation Building (F)",
+                   "code": "f"
+                   },
+                   {
+                   "loc": "52.674999, -8.572936",
+                   "name": "Engineering Research Building (ER)",
+                   "code": "er"
+                   },
+                   {
+                   "loc": "52.675570, -8.573274",
+                   "name": "Languages Building (LC)",
+                   "code": "lc"
+                   },
+                   {
+                   "loc": "52.673637, -8.569126",
+                   "name": "Lonsdale Building (L)",
+                   "code": "l"
+                   },
+                   {
+                   "loc": "52.673842, -8.567817",
+                   "name": "Schrodinger Building (SR)",
+                   "code": "sr"
+                   },
+                   {
+                   "loc": "52.674402, -8.568269",
+                   "name": "PESS Building (PESS/P)",
+                   "code": "p"
+                   },
+                   {
+                   "loc": "52.677731, -8.569184",
+                   "name": "Health Sciences Building (HS)",
+                   "code": "hs"
+                   },
+                   {
+                   "loc": "52.674030, -8.572040",
+                   "name": "Main Building (A/B/C/D/E)",
+                   "code": "m"
+                   },
+                   {
+                   "loc": "52.672969, -8.569344",
+                   "name": "Analog Building (AD)",
+                   "code": "ad"
+                   },
+                   {
+                   "loc": "52.677901, -8.569559",
+                   "name": "Irish World Academy Building (IW)",
+                   "code": "iw"
+                   },
+                   {
+                   "loc": "52.678278, -8.568374",
+                   "name": "Medical School (GEMS)",
+                   "code": "gem"
+                   }
+                   ],
+    "rtpi_link": "https://data.dublinked.ie/cgi-bin/rtpi/realtimebusinformation?stopid=607631&format=json",
+    "more_page": {
+        "facebook": [
+                     "fb://profile/universityoflimerick",
+                     "https://www.facebook.com/universityoflimerick"
+                     ],
+        "twitter": [
+                    "twitter:///user?screen_name=UL",
+                    "https://twitter.com/UL"
+                    ],
+        "instgram": [
+                     "instagram://user?username=ulcampus",
+                     "https://www.instagram.com/ulcampus/"
+                     ],
+        "about": "http://www.ul.ie/",
+        "feedback": "https://docs.google.com/forms/d/e/1FAIpQLSdxPYze-uBl2RJUfH_yNIqRmBZbAid5geAuxtjWSi-mcJT-zQ/viewform"
+    },
+    "first_seven_weeks": [
+                          "https://firstsevenweeks.wordpress.com/home/",
+                          "https://www.facebook.com/first7weeks",
+                          "mailto:first.seven.weeks@ul.ie",
+                          "tel:061234256",
+                          "http://maps.apple.com/?ll=52.673139,-8.570278&z=15&q=F7W+Hub"
+                          ],
+    "glucksman_library": {
+        "useful_links": [
+                         "https://ul-ie-primo.hosted.exlibrisgroup.com/primo-explore/search?vid=353UOL_VU1&sortby=rank",
+                         "http://ul.libcal.com/booking/studyroom",
+                         "http://libguides.ul.ie/citeitright",
+                         "http://www.ul.ie/library/about/news-events/"
+                         ],
+        "contact": [
+                    "http://www.ul.ie/library/",
+                    "tel:061202166",
+                    "mailto:libinfo@ul.ie"
+                    ]
+    },
+    "useful_numbers": {
+        "emergency": [
+                      "tel:061212400",
+                      "tel:061213333",
+                      "tel:061202010",
+                      "tel:061202534",
+                      "tel:061202700"
+                      ],
+        "faculty_directories": [
+                                "tel:061202286",
+                                "tel:061202511",
+                                "tel:061202116",
+                                "tel:061202688"
+                                ],
+        "others": [
+                   "tel:061234377",
+                   "tel:061202414",
+                   "tel:061233755"
+                   ]
+    },
+    "useful_information": {
+        "list1": [
+                  "https://www.ulsu.ie",
+                  "https://www.ulpsu.ie",
+                  "https://ulsu.ie/clubssocs",
+                  "http://ulsites.ul.ie/academiccalendar/",
+                  "http://www.ul.ie/staff-search",
+                  "https://ulsites.ul.ie/saa/saa-policies-procedures",
+                  "http://ulsites.ul.ie/ses/"
+                  ],
+        "list2": [
+                  "http://ulsites.ul.ie/itd/new-students",
+                  "http://ulsites.ul.ie/itd/student-email-0",
+                  "http://ulsites.ul.ie/itd/student-accounts-passwords-security",
+                  "http://ulsites.ul.ie/itd/student-printing-service",
+                  "http://ulsites.ul.ie/itd/lab-locations-and-cla-services",
+                  "http://ulsites.ul.ie/itd/software-students"
+                  ]
+    }
+}
