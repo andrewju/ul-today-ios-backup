@@ -156,8 +156,11 @@ class ClassesTableViewController: UITableViewController {
     }
     
     func requestTimetable() {
+        guard let config = AppDelegate.getRemoteConfig() else {
+            return
+        }
         self.classDataRequested = false
-        self.request(requestURL: URL.init(string: "https://ul-today-app.appspot.com/control")!, completion: {
+        self.request(requestURL: URL.init(string: "\(config.serverHost)/\(config.getServiceName(ULRemoteConfigurationKey.serviceControl.rawValue, defaultValue: "control.php"))")!, completion: {
             (data, response, error) in
             self.classDataRequested = true
             if(!(error != nil)) {
@@ -167,7 +170,7 @@ class ClassesTableViewController: UITableViewController {
                     if(/*!self.holiday*/true) {
                         let type = (self.role == "STAFF" ? "true" : "false")
                         let params = "/id/"+self.id+"/staff/"+type+"/today/false"
-                        self.request(requestURL: URL.init(string: "https://ul-today-app.appspot.com/id-timetable"+params)!, completion: {
+                        self.request(requestURL: URL.init(string: "\(config.serverHost)/\(config.getServiceName(ULRemoteConfigurationKey.serviceTimeTable.rawValue, defaultValue: "id-timetable-v2.php"))"+params)!, completion: {
                             (data, response, error) in
                             if(!(error != nil)) {
                                 do {

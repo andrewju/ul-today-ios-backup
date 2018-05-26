@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var swipeGestureLeft  = UISwipeGestureRecognizer()
     var swipeGestureRight  = UISwipeGestureRecognizer()
+    
+    var remoteConfig: ULConfiguration?
+    var mainVc: MainViewController?
+    
+    class func getRemoteConfig() -> ULConfiguration? {
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            return appDelegate.remoteConfig
+        }
+        return nil
+    }
     
     func request(requestURL: URL, completion: @escaping (Data?, URLResponse?, Error?) -> Swift.Void) {
         var request = URLRequest(url: requestURL)
@@ -41,7 +52,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func requestControl() {
-        self.request(requestURL: URL.init(string: "https://ul-today-app.appspot.com/control")!, completion: {
+        guard let remoteConfig = self.remoteConfig else {
+            return
+        }
+        self.request(requestURL: URL.init(string: "\(remoteConfig.serverHost)/\(remoteConfig.getServiceName(ULRemoteConfigurationKey.serviceControl.rawValue, defaultValue: "control.php"))")!, completion: {
             (data, response, error) in
             if(!(error != nil)) {
                 do {
@@ -56,16 +70,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             self.window?.rootViewController?.present(alert, animated: true, completion: nil)                }
                     } else { // perfect
                         //let tabBarController = self.window?.rootViewController as? UITabBarController
-
-
-
                     }
-                    
-                    
                 } catch {
                     print("error serializing JSON: \(error)")
                     
-                    DispatchQueue.main.async{
+                    DispatchQueue.main.async {
                         let alert = UIAlertController(title: nil, message: "Error happened, sorry!\nPlease mail to ulapp@ul.ie to report the incident!", preferredStyle: UIAlertControllerStyle.alert)
                         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction) in Thread.sleep(forTimeInterval: 0.5); exit(0)}))
                         self.window?.rootViewController?.present(alert, animated: true, completion: nil)                }
@@ -117,7 +126,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         systemVersion = 2
         requestControl()
-        
+        self.window = UIWindow(frame: UIScreen.main.bounds)
         swipeGestureLeft = UISwipeGestureRecognizer(target: self, action: #selector(AppDelegate.swipwView(_:)))
         swipeGestureLeft.direction = .left
         self.window?.addGestureRecognizer(swipeGestureLeft)
@@ -125,6 +134,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         swipeGestureRight = UISwipeGestureRecognizer(target: self, action: #selector(AppDelegate.swipwView(_:)))
         swipeGestureRight.direction = .right
         self.window?.addGestureRecognizer(swipeGestureRight)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let mainVc = storyboard.instantiateInitialViewController() as?
+            MainViewController {
+            self.mainVc = mainVc
+            let homeVc = storyboard.instantiateViewController(withIdentifier: "TabHome")
+            let newsVc = storyboard.instantiateViewController(withIdentifier: "TabNews")
+            let classesVc = storyboard.instantiateViewController(withIdentifier: "TabClasses")
+            let mapVc = storyboard.instantiateViewController(withIdentifier: "TabMap")
+            let moreVc = storyboard.instantiateViewController(withIdentifier: "TabMore")
+            
+            if (NSKeyedUnarchiver.unarchiveObject(withFile: UserInfo.ArchiveURL.path) as? UserInfo) != nil {
+                mainVc.setViewControllers([homeVc, newsVc, classesVc, mapVc, moreVc], animated: false)
+            } else {
+                mainVc.setViewControllers([homeVc, newsVc, mapVc, moreVc], animated: false)
+            }
+            
+            window?.rootViewController = mainVc
+            window?.makeKeyAndVisible()
+        }
+        
+        let config = ULConfiguration()
+        if config.loadDefaultConfigs() {
+            config.fetchRemoteConfigs(TimeInterval(5)) { (status, error) in
+                if status == .success {
+                    // more operations
+                    if (NSKeyedUnarchiver.unarchiveObject(withFile: UserInfo.ArchiveURL.path) as? UserInfo) != nil {
+                        if config.getBool(ULRemoteConfigurationKey.exameFeature.rawValue) {
+                            self.mainVc?.showClassTab(true, animated: false)
+                        } else {
+                            self.mainVc?.showClassTab(false, animated: false)
+                        }
+                    }
+                } else {
+                    // more error handling
+                }
+            }
+            self.remoteConfig = config
+        }
+        
         return true
     }
     

@@ -71,13 +71,12 @@
     
     if (task) {
         if (task.state != NSURLSessionTaskStateCompleted) {
-            
+            UIActivityIndicatorView *activityIndicatorView = self.activityIndicatorView;
             if (task.state == NSURLSessionTaskStateRunning) {
-                [self.activityIndicatorView startAnimating];
+                [activityIndicatorView startAnimating];
             } else {
-                [self.activityIndicatorView stopAnimating];
+                [activityIndicatorView stopAnimating];
             }
-#pragma clang diagnostic pop
 
             [notificationCenter addObserver:self selector:@selector(af_startAnimating) name:AFNetworkingTaskDidResumeNotification object:task];
             [notificationCenter addObserver:self selector:@selector(af_stopAnimating) name:AFNetworkingTaskDidCompleteNotification object:task];

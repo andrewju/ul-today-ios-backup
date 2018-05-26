@@ -44,6 +44,14 @@ class AccountSetting: UITableViewController, UITextFieldDelegate, UINavigationCo
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(UserInfo(role:role, id: id)!, toFile: UserInfo.ArchiveURL.path)
         if !isSuccessfulSave {
             print("Failed to save user...")
+        } else {
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate, let config = AppDelegate.getRemoteConfig() {
+                if config.getBool(ULRemoteConfigurationKey.exameFeature.rawValue) {
+                    appDelegate.mainVc?.showClassTab(true, animated: false)
+                } else {
+                    appDelegate.mainVc?.showClassTab(false, animated: false)
+                }
+            }
         }
     }
     

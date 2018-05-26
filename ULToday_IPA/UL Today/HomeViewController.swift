@@ -73,9 +73,13 @@ class HomeViewController: UIViewController {
     
     func getLibDataNew() {
         
+        guard let config = AppDelegate.getRemoteConfig() else {
+            return
+        }
+        
         self.homeLabel = "Loading..."
         
-        self.request(requestURL: URL.init(string: "https://ul-today-app.appspot.com/library")!, completion: {
+        self.request(requestURL: URL.init(string: "\(config.serverHost)/\(config.getServiceName(ULRemoteConfigurationKey.serviceLibrary.rawValue, defaultValue: "library.php"))")!, completion: {
             (data, response, error) in
             if(!(error != nil)) {
                 do {
@@ -118,10 +122,12 @@ class HomeViewController: UIViewController {
     }
     
     func getBookshop() {
-        
+        guard let config = AppDelegate.getRemoteConfig() else {
+            return
+        }
         self.homeLabel = "Loading..."
         
-        self.request(requestURL: URL.init(string: "https://ul-today-app.appspot.com/bookshop")!, completion: {
+        self.request(requestURL: URL.init(string: "\(config.serverHost)/\(config.getServiceName(ULRemoteConfigurationKey.serviceBookshop.rawValue, defaultValue: "bookshop.php"))")!, completion: {
             (data, response, error) in
             if(!(error != nil)) {
                 do {
@@ -167,9 +173,13 @@ class HomeViewController: UIViewController {
     
     func getArena() {
         
+        guard let config = AppDelegate.getRemoteConfig() else {
+            return
+        }
+        
         self.homeLabel = "Loading..."
         
-        self.request(requestURL: URL.init(string: "https://ul-today-app.appspot.com/arena")!, completion: {
+        self.request(requestURL: URL.init(string: "\(config.serverHost)/\(config.getServiceName(ULRemoteConfigurationKey.serviceArena.rawValue, defaultValue: "arena.php"))")!, completion: {
             (data, response, error) in
             if(!(error != nil)) {
                 do {
@@ -231,7 +241,11 @@ class HomeViewController: UIViewController {
     }
     
     func getHomeFeatures() {
-        self.request(requestURL: URL.init(string: "https://ul-today-app.appspot.com/home-feature")!, completion: {
+        guard let config = AppDelegate.getRemoteConfig() else {
+            return
+        }
+        
+        self.request(requestURL: URL.init(string: "\(config.serverHost)/\(config.getServiceName(ULRemoteConfigurationKey.serviceHomeFeature.rawValue, defaultValue: "home-feature.php"))")!, completion: {
             (data, response, error) in
             if(!(error != nil)) {
                 do {
@@ -287,7 +301,10 @@ class HomeViewController: UIViewController {
     
     //
     func getInstagrams() {
-        self.request(requestURL: URL.init(string: "http://35.197.202.71/instagram.php")!, completion: {
+        guard let remoteConfig =  AppDelegate.getRemoteConfig() else {
+            return
+        }
+        self.request(requestURL: URL.init(string: "\(remoteConfig.serverHost)/\(remoteConfig.getServiceName(ULRemoteConfigurationKey.serviceInstagram.rawValue, defaultValue: "instagram.php"))")!, completion: {
             (data, response, error) in
             if(!(error != nil)) {
                 do {
@@ -343,10 +360,12 @@ class HomeViewController: UIViewController {
     
     
     func getAlerts() {
-        
+        guard let config = AppDelegate.getRemoteConfig() else {
+            return 
+        }
         self.homeLabel = "Loading..."
         
-        self.request(requestURL: URL.init(string: "https://ul-today-app.appspot.com/alerts")!, completion: {
+        self.request(requestURL: URL.init(string: "\(config.serverHost)/\(config.getServiceName(ULRemoteConfigurationKey.serviceAlerts.rawValue, defaultValue: "alerts.php"))")!, completion: {
             (data, response, error) in
             if(!(error != nil)) {
                 do {
@@ -372,14 +391,14 @@ class HomeViewController: UIViewController {
                     
                 }
             } else {
-                if((error! as NSError).code == -1009) {
+                if((error as NSError?)?.code == -1009) {
                     // NSURLErrorNotConnectedToInternet = -1009
                     
                     let alertController = UIAlertController(title: nil, message: self.internetMessage, preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction) in Thread.sleep(forTimeInterval: 0.5); exit(0)}))
                     self.present(alertController, animated: true) {
                     }
-                } else if ([-1001, -1003, -1004].contains((error! as NSError).code)) {
+                } else if ([-1001, -1003, -1004].contains((error as NSError?)?.code ?? -1)) {
                     // NSURLErrorTimedOut = -1001
                     // NSURLErrorCannotFindHost = -1003
                     // NSURLErrorCannotConnectToHost = -1004

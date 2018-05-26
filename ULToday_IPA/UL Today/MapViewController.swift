@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import CoreGraphics
 
 class MapViewController: UIViewController {
     
@@ -52,17 +53,51 @@ class MapViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    
+    var locationManager = CLLocationManager()
+    var mylocationCoordinat: MKAnnotation?
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if CLLocationManager.locationServicesEnabled() {
+            let authorizationStatus = CLLocationManager.authorizationStatus()
+            if authorizationStatus == .authorizedAlways || authorizationStatus == .authorizedWhenInUse {
+                locationManager.delegate = self
+                locationManager.startUpdatingLocation()
+            } else if authorizationStatus == .notDetermined {
+                locationManager.requestWhenInUseAuthorization()
+                locationManager.delegate = self
+            }
+        }
+    }
 }
 
-extension MapViewController: MKMapViewDelegate
+extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate
 {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?
     {
-        let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "annotationView")
-        annotationView.canShowCallout = true
-        annotationView.rightCalloutAccessoryView = UIButton.init(type: UIButtonType.detailDisclosure)
+        if let myLocation = self.mylocationCoordinat, myLocation.coordinate.latitude == annotation.coordinate.latitude, myLocation.coordinate.longitude == annotation.coordinate.longitude {
+            let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "yourLocation")
+            
+            annotationView.canShowCallout = true
+            annotationView.rightCalloutAccessoryView = UIButton.init(type: UIButtonType.detailDisclosure)
+
+            UIGraphicsBeginImageContext(CGSize(width: 40, height: 40))
+            #imageLiteral(resourceName: "location").draw(in: CGRect(x: 0, y: 0, width: 40, height: 40))
+            if let image = UIGraphicsGetImageFromCurrentImageContext() {
+                annotationView.image = image
+            }
+            UIGraphicsEndImageContext()
+            return annotationView
+        } else {
+            let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "annotationView")
+            
+            annotationView.canShowCallout = true
+            annotationView.rightCalloutAccessoryView = UIButton.init(type: UIButtonType.detailDisclosure)
+            return annotationView
+        }
         
-        return annotationView
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl)
@@ -79,5 +114,29 @@ extension MapViewController: MKMapViewDelegate
         }
         
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+    // MARK: - location manager delegate
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedAlways || status == .authorizedWhenInUse {
+            manager.startUpdatingLocation()
+        }
+    }
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        locationManager.stopUpdatingLocation()
+        if let newLocation = locations.last {
+            
+            let coordinate2D = newLocation.coordinate
+            
+            if let myLocation = self.mylocationCoordinat {
+                self.mapView.removeAnnotation(myLocation)
+            }
+            let annotation = MKPointAnnotation()
+            annotation.title = "You are here"
+            annotation.coordinate = coordinate2D
+            self.mapView.addAnnotation(annotation)
+            self.mylocationCoordinat = annotation
+            
+//            let mapItem = MapItem(title: "You are here", coordinate: coordinate2D)
+        }
     }
 }

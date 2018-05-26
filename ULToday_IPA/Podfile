@@ -6,4 +6,6 @@ target 'UL Today' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   # Pods for UL Today
    pod 'AFNetworking', '~> 3.0'
+   pod 'Firebase/Core'
+   pod 'Firebase/RemoteConfig'
 end

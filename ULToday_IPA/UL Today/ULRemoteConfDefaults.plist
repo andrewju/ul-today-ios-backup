@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>server_prefix</key>
+	<string>35.197.202.71</string>
+	<key>minimal_version_ipa</key>
+	<integer>4</integer>
+	<key>show_class_tab</key>
+	<false/>
+	<key>service_name_control</key>
+	<string>control</string>
+	<key>service_name_library</key>
+	<string>library</string>
+	<key>service_name_bookshop</key>
+	<string>bookshop</string>
+	<key>service_name_arena</key>
+	<string>arena</string>
+	<key>service_name_home_feature</key>
+	<string>home-feature</string>
+	<key>service_name_alerts</key>
+	<string>alerts</string>
+	<key>service_name_twitter</key>
+	<string>twitter</string>
+	<key>service_name_events</key>
+	<string>events</string>
+	<key>service_name_time_table</key>
+	<string>id-timetable</string>
+	<key>service_name_instagram</key>
+	<string>instagram.php</string>
+</dict>
+</plist>

@@ -84,6 +84,9 @@ class TwitterTableViewController: UITableViewController {
     
     
     func getTweets() {
+        guard let config = AppDelegate.getRemoteConfig() else {
+            return
+        }
         
         tweetsLit.removeAll()
         DispatchQueue.main.async {
@@ -91,7 +94,7 @@ class TwitterTableViewController: UITableViewController {
             
         }
         
-        self.request(requestURL: URL.init(string: "https://ul-today-app.appspot.com/twitter")!, completion: {
+        self.request(requestURL: URL.init(string: "\(config.serverHost)/\(config.getServiceName(ULRemoteConfigurationKey.serviceTwitter.rawValue, defaultValue: "twitter.php"))")!, completion: {
             (data, response, error) in
             if(!(error != nil)) {
                 do {

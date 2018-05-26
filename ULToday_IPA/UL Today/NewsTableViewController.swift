@@ -75,8 +75,10 @@ class NewsTableViewController: UITableViewController, XMLParserDelegate{
     }
     
     func loadData() {
-        
-        self.request(requestURL: URL.init(string: "https://ul-today-app.appspot.com/events")!, completion: {
+        guard let config = AppDelegate.getRemoteConfig() else {
+            return
+        }
+        self.request(requestURL: URL.init(string: "\(config.serverHost)/\(config.getServiceName(ULRemoteConfigurationKey.serviceEvents.rawValue, defaultValue: "events.php"))")!, completion: {
             (data, response, error) in
             if(!(error != nil)) {
                 do {
