@@ -111,7 +111,7 @@ class HomeViewController: UIViewController {
                     // NSURLErrorCannotConnectToHost = -1004
                     
                     DispatchQueue.main.async {
-                        self.noticeLabel.font = UIFont.init(name: "Avenir-Roman", size: 17)
+//                        self.noticeLabel.font = UIFont.init(name: "Avenir-Roman", size: 17)
                         self.noticeLabel.textAlignment = NSTextAlignment.center
                         self.noticeLabel.text = self.serviceUnavailableMessage
                     }
@@ -160,7 +160,7 @@ class HomeViewController: UIViewController {
                     // NSURLErrorCannotConnectToHost = -1004
                     
                     DispatchQueue.main.async {
-                        self.noticeLabel.font = UIFont.init(name: "Avenir-Roman", size: 17)
+//                        self.noticeLabel.font = UIFont.init(name: "Avenir-Roman", size: 17)
                         self.noticeLabel.textAlignment = NSTextAlignment.center
                         self.noticeLabel.text = self.serviceUnavailableMessage
                     }
@@ -229,7 +229,7 @@ class HomeViewController: UIViewController {
                     // NSURLErrorCannotConnectToHost = -1004
                     
                     DispatchQueue.main.async {
-                        self.noticeLabel.font = UIFont.init(name: "Avenir-Roman", size: 17)
+//                        self.noticeLabel.font = UIFont.init(name: "Avenir-Roman", size: 17)
                         self.noticeLabel.textAlignment = NSTextAlignment.center
                         self.noticeLabel.text = self.serviceUnavailableMessage
                     }
@@ -289,7 +289,7 @@ class HomeViewController: UIViewController {
                     // NSURLErrorCannotConnectToHost = -1004
                     
                     DispatchQueue.main.async {
-                        self.noticeLabel.font = UIFont.init(name: "Avenir-Roman", size: 17)
+//                        self.noticeLabel.font = UIFont.init(name: "Avenir-Roman", size: 17)
                         self.noticeLabel.textAlignment = NSTextAlignment.center
                         self.noticeLabel.text = self.serviceUnavailableMessage
                     }
@@ -348,7 +348,7 @@ class HomeViewController: UIViewController {
                     // NSURLErrorCannotConnectToHost = -1004
                     
                     DispatchQueue.main.async {
-                        self.noticeLabel.font = UIFont.init(name: "Avenir-Roman", size: 17)
+//                        self.noticeLabel.font = UIFont.init(name: "Avenir-Roman", size: 17)
                         self.noticeLabel.textAlignment = NSTextAlignment.center
                         self.noticeLabel.text = self.serviceUnavailableMessage
                     }
@@ -404,7 +404,7 @@ class HomeViewController: UIViewController {
                     // NSURLErrorCannotConnectToHost = -1004
                     
                     DispatchQueue.main.async {
-                        self.noticeLabel.font = UIFont.init(name: "Avenir-Roman", size: 17)
+//                        self.noticeLabel.font = UIFont.init(name: "Avenir-Roman", size: 17)
                         self.noticeLabel.textAlignment = NSTextAlignment.center
                         self.noticeLabel.text = self.serviceUnavailableMessage
                     }
@@ -454,19 +454,19 @@ class HomeViewController: UIViewController {
                     }
                     DispatchQueue.main.async {
                         if(busText.count < 5) {
-                            self.noticeLabel.font = UIFont.init(name: "Avenir-Roman", size: 17)
+//                            self.noticeLabel.font = UIFont.init(name: "Avenir-Roman", size: 17)
                             self.noticeLabel.textAlignment = NSTextAlignment.center
                             self.noticeLabel.text = "There is no bus right now."
                         } else {
-                            if(self.screenType == 0) {
-                                self.noticeLabel.font = UIFont.init(name: "Courier", size: 17)
-                                
-                            } else if(self.screenType == 1) {
-                                self.noticeLabel.font = UIFont.init(name: "Courier", size: 17)
-                                
-                            } else {
-                                self.noticeLabel.font = UIFont.init(name: "Courier", size: 13)
-                            }
+//                            if(self.screenType == 0) {
+//                                self.noticeLabel.font = UIFont.init(name: "Courier", size: 17)
+//
+//                            } else if(self.screenType == 1) {
+//                                self.noticeLabel.font = UIFont.init(name: "Courier", size: 17)
+//
+//                            } else {
+//                                self.noticeLabel.font = UIFont.init(name: "Courier", size: 13)
+//                            }
                             self.noticeLabel.textAlignment = NSTextAlignment.left
                             self.noticeLabel.text = self.busText
                         }
@@ -474,7 +474,7 @@ class HomeViewController: UIViewController {
                 } catch {
                     print("error serializing JSON: \(error)")
                     DispatchQueue.main.async {
-                        self.noticeLabel.font = UIFont.init(name: "Avenir-Roman", size: 17)
+//                        self.noticeLabel.font = UIFont.init(name: "Avenir-Roman", size: 17)
                         self.noticeLabel.textAlignment = NSTextAlignment.center
                         self.noticeLabel.text = self.errorMessage
                     }
@@ -493,7 +493,7 @@ class HomeViewController: UIViewController {
                     // NSURLErrorCannotConnectToHost = -1004
                     
                     DispatchQueue.main.async {
-                        self.noticeLabel.font = UIFont.init(name: "Avenir-Roman", size: 17)
+//                        self.noticeLabel.font = UIFont.init(name: "Avenir-Roman", size: 17)
                         self.noticeLabel.textAlignment = NSTextAlignment.center
                         self.noticeLabel.text = self.serviceUnavailableMessage
                     }                
@@ -526,6 +526,11 @@ class HomeViewController: UIViewController {
         callList.addAction(number3)
 
         callList.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+ 
+            callList.popoverPresentationController?.sourceView = self.view
+            callList.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection()
+            callList.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+            
         
         self.present(callList, animated: true, completion: nil)
     }

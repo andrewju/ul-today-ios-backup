@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -23,10 +22,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="itd-logo" translatesAutoresizingMaskIntoConstraints="NO" id="qpv-fA-b1e">
-                                <rect key="frame" x="91" y="114" width="138" height="109"/>
+                                <rect key="frame" x="75.5" y="114" width="169" height="109"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="109" id="aa6-WN-s5s"/>
+                                </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ctl-logo" translatesAutoresizingMaskIntoConstraints="NO" id="AIh-l3-zNt">
-                                <rect key="frame" x="109" y="225" width="103" height="71"/>
+                                <rect key="frame" x="44.5" y="225" width="232" height="71"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="71" id="fNr-NX-2NA"/>
                                 </constraints>
@@ -53,7 +55,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Endorsed by" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9rf-pd-1MI">
-                                <rect key="frame" x="111" y="70" width="99" height="21"/>
+                                <rect key="frame" x="113" y="70" width="95" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="6Bn-Wg-byb"/>
                                 </constraints>
@@ -67,17 +69,15 @@
                             <constraint firstItem="H8U-W9-EKs" firstAttribute="top" secondItem="hIV-ge-hij" secondAttribute="bottom" constant="14" id="28U-W9-z4X"/>
                             <constraint firstItem="hIV-ge-hij" firstAttribute="centerX" secondItem="9rf-pd-1MI" secondAttribute="centerX" id="9IA-dV-0db"/>
                             <constraint firstItem="gHQ-wl-JIC" firstAttribute="centerX" secondItem="hIV-ge-hij" secondAttribute="centerX" id="9iM-G3-cBq"/>
-                            <constraint firstItem="AIh-l3-zNt" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="93" id="Ali-I7-vYk"/>
+                            <constraint firstItem="9rf-pd-1MI" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="GQQ-A9-pIA"/>
                             <constraint firstItem="qpv-fA-b1e" firstAttribute="top" secondItem="9rf-pd-1MI" secondAttribute="bottom" constant="23" id="OIm-A3-bVy"/>
                             <constraint firstItem="gHQ-wl-JIC" firstAttribute="centerX" secondItem="H8U-W9-EKs" secondAttribute="centerX" id="YiT-B9-DYS"/>
                             <constraint firstItem="AIh-l3-zNt" firstAttribute="top" secondItem="qpv-fA-b1e" secondAttribute="bottom" constant="2" id="cPK-yN-HOa"/>
                             <constraint firstItem="qpv-fA-b1e" firstAttribute="centerX" secondItem="9rf-pd-1MI" secondAttribute="centerX" id="cq9-Ov-Gt7"/>
-                            <constraint firstItem="qpv-fA-b1e" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="75" id="gxe-RW-Sgz"/>
                             <constraint firstItem="hIV-ge-hij" firstAttribute="top" secondItem="gHQ-wl-JIC" secondAttribute="bottom" constant="13" id="ods-aP-Kkj"/>
                             <constraint firstItem="AIh-l3-zNt" firstAttribute="centerX" secondItem="9rf-pd-1MI" secondAttribute="centerX" id="ppF-T0-gQG"/>
                             <constraint firstItem="gHQ-wl-JIC" firstAttribute="top" secondItem="AIh-l3-zNt" secondAttribute="bottom" constant="8" symbolic="YES" id="tQS-j3-BvI"/>
                             <constraint firstItem="qpv-fA-b1e" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="wF6-wx-zAn"/>
-                            <constraint firstItem="9rf-pd-1MI" firstAttribute="leading" secondItem="hIV-ge-hij" secondAttribute="leading" id="xCq-GM-F1O"/>
                         </constraints>
                     </view>
                 </viewController>

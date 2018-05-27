@@ -317,27 +317,29 @@ class NewsTableViewController: UITableViewController, XMLParserDelegate{
             cell.newsType.backgroundColor = UIColor.brown
         }
         cell.newsDate.text = newsItem.date.components(separatedBy: "T")[0].replacingOccurrences(of: "-", with: "/")
-
         
-        let url = URL(string: newsItem.photo.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)
-        let urlRequest = URLRequest(url: url!)
-        
-        let task = URLSession.shared.dataTask(with: urlRequest as URLRequest){ data, response, error in
-            if((data) != nil) {
-                let image = UIImage.init(data: data!)
-                if((image) != nil) {
-                    DispatchQueue.main.async() {
-                        if let updateCell = tableView.cellForRow(at: indexPath as IndexPath) as? NewsTableViewCell {
-                            updateCell.newsPhoto.contentMode = UIViewContentMode.scaleAspectFill
-                            updateCell.newsPhoto.clipsToBounds = true
-                            updateCell.newsPhoto.image = image
+        if let urlString = newsItem.photo.removingPercentEncoding {
+            let url = URL(string: (urlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed))!)
+            let urlRequest = URLRequest(url: url!)
+            
+            
+            let task = URLSession.shared.dataTask(with: urlRequest as URLRequest){ data, response, error in
+                if((data) != nil) {
+                    let image = UIImage.init(data: data!)
+                    if((image) != nil) {
+                        DispatchQueue.main.async() {
+                            if let updateCell = tableView.cellForRow(at: indexPath as IndexPath) as? NewsTableViewCell {
+                                updateCell.newsPhoto.contentMode = UIViewContentMode.scaleAspectFill
+                                updateCell.newsPhoto.clipsToBounds = true
+                                updateCell.newsPhoto.image = image
+                            }
                         }
                     }
                 }
             }
+            task.resume()
         }
-        task.resume()
-        
+
         return cell
     }
     
