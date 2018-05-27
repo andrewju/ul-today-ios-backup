@@ -25,45 +25,59 @@ class GlucksmanLibrary: UITableViewController {
             let links = AppData.shared.glucksmanLibrary["useful_links"] as! [String]
             switch  (indexPath as NSIndexPath).row {
             case 0:
-                let linkURL = URL(string: links[0])
-                UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+                if let linkURL = URL(string: links[0]) {
+//                UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+                    WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
+                }
             case 1:
                 let linkURL = URL(string: links[1])
-                UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+//                UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+                WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
             case 2:
                 let linkURL = URL(string: links[2])
-                UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+//                UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+                WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
             case 3:
                 let linkURL = URL(string: links[3])
-                UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+//                UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+                WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
             default:
                 let linkURL = URL(string: AppData.shared.defaultURL!)
-                UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+//                UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+                WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
             }
         case 1:
             let links = AppData.shared.glucksmanLibrary["contact"] as! [String]
             switch  (indexPath as NSIndexPath).row {
             case 0:
-                let linkURL = URL(string: links[0])
-                UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+                if let linkURL = URL(string: links[0]) {
+//                UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+                    WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
+                }
             case 1:
-                let linkURL = URL(string: links[1])
-                UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+                if let linkURL = URL(string: links[1]) {
+//                UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+                    WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
+                }
             case 2:
-                let linkURL = URL(string: links[2])
-                UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+                if let linkURL = URL(string: links[2]) {
+//                UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+                    WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
+                }
             default:
-                let linkURL = URL(string: AppData.shared.defaultURL!)
-                UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+                if let linkURL = URL(string: AppData.shared.defaultURL!) {
+//                UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+                    WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
+                }
             }
 
         default:
-            let linkURL = URL(string: AppData.shared.defaultURL!)
-            UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
-            
+            if let linkURL = URL(string: AppData.shared.defaultURL!) {
+//            UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+                WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
+            }
         }
         tableView.deselectRow(at: indexPath, animated: true)
-
     }
 
 }

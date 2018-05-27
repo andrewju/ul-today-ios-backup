@@ -96,7 +96,8 @@ class CampusMapViewController: UIViewController, UITableViewDelegate, UITableVie
         let location = cellData["loc"] as! NSString
         let url = String(format: "http://maps.apple.com/?ll=%@,%@&z=15&q=%@", location.components(separatedBy: ",")[0].trimmingCharacters(in: CharacterSet.whitespacesAndNewlines), location.components(separatedBy: ",")[1].trimmingCharacters(in: CharacterSet.whitespacesAndNewlines), (cellData["name"] as! NSString).trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).replacingOccurrences(of: " ", with: "+"))
         let linkURL = URL(string: url)
-        UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+//        UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+        WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
         
         tableView.deselectRow(at: indexPath, animated: true)
 

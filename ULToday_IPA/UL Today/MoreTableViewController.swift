@@ -51,46 +51,63 @@ class OthersTableViewController: UITableViewController {
                 let links = AppData.shared.morePage["facebook"] as! [String]
                 let facebookURL = URL(string: links[0])!
                 if UIApplication.shared.canOpenURL(facebookURL) {
-                    UIApplication.shared.open(facebookURL, options: [:], completionHandler: nil)
+//                    UIApplication.shared.open(facebookURL, options: [:], completionHandler: nil)
+                    WebBrowserVC.openBroswer(self, url: facebookURL, title: nil, showCloseButton: true)
                 } else {
-                    UIApplication.shared.open(URL(string: links[1])!, options: [:], completionHandler: nil)
+//                    UIApplication.shared.open(URL(string: links[1])!, options: [:], completionHandler: nil)
+                    if let url = URL(string: links[1]) {
+                        WebBrowserVC.openBroswer(self, url: url, title: nil, showCloseButton: true)
+                    }
                 }
             case 1:
                 let links = AppData.shared.morePage["twitter"] as! [String]
                 let twitterURL = URL(string: links[0])!
                 if UIApplication.shared.canOpenURL(twitterURL) {
-                    UIApplication.shared.open(twitterURL, options: [:], completionHandler: nil)
+//                    UIApplication.shared.open(twitterURL, options: [:], completionHandler: nil)
+                    WebBrowserVC.openBroswer(self, url: twitterURL, title: nil, showCloseButton: true)
                 } else {
-                    UIApplication.shared.open(URL(string: links[1])!, options: [:], completionHandler: nil)
+//                    UIApplication.shared.open(URL(string: links[1])!, options: [:], completionHandler: nil)
+                    if let url = URL(string: links[1]) {
+                        WebBrowserVC.openBroswer(self, url: url, title: nil, showCloseButton: true)
+                    }
                 }
             case 2:
                 let links = AppData.shared.morePage["instgram"] as! [String]
                 let twitterURL = URL(string: links[0])!
                 if UIApplication.shared.canOpenURL(twitterURL) {
-                    UIApplication.shared.open(twitterURL, options: [:], completionHandler: nil)
+//                    UIApplication.shared.open(twitterURL, options: [:], completionHandler: nil)
+                    WebBrowserVC.openBroswer(self, url: twitterURL, title: nil, showCloseButton: true)
                 } else {
-                    UIApplication.shared.open(URL(string: links[1])!, options: [:], completionHandler: nil)
+//                    UIApplication.shared.open(URL(string: links[1])!, options: [:], completionHandler: nil)
+                    if let url = URL(string: links[1]) {
+                        WebBrowserVC.openBroswer(self, url: url, title: nil, showCloseButton: true)
+                    }
                 }
             default:
                 let linkURL = URL(string: AppData.shared.defaultURL!)
-                UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+//                UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+                WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
             }
         case 3:
             switch  (indexPath as NSIndexPath).row {
             case 0:
                 let linkURL = URL(string: AppData.shared.defaultURL!)
-                UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+//                UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+                WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
             case 1:
                 let linkURL = URL(string: AppData.shared.morePage["feedback"] as! String)
-                UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+//                UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+                WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
             default:
                 let linkURL = URL(string: AppData.shared.defaultURL!)
-                UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+//                UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+                WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
             }
             
         default:
             let linkURL = URL(string: AppData.shared.defaultURL!)
-            UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+//            UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+            WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
             
         }
         
