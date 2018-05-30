@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 import Firebase
 
 @UIApplicationMain
@@ -121,7 +122,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    
+  
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         systemVersion = 2
@@ -173,8 +174,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             self.remoteConfig = config
         }
+ 
+        
+//        FirebaseApp.configure()
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { (granted, error) in
+        }
+        application.registerForRemoteNotifications()
+        Messaging.messaging().delegate = self
         
         return true
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        print("did register remote notification: \(deviceToken)")
+        //Messaging.messaging().apnsToken = deviceToken
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Failed to register remote notification: \(error)")
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        print("did receive remote message: \(userInfo)")
+        completionHandler(UIBackgroundFetchResult.newData)
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -200,3 +224,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+// ios 10 message handling
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let userInfo = notification.request.content.userInfo
+        print("did receive remote notification: \(userInfo)")
+        
+        
+        completionHandler([])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        print("did receive remote notification 2: \(userInfo)")
+        completionHandler()
+    }
+}
+
+extension AppDelegate: MessagingDelegate {
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        print("Firebase registration token: \(fcmToken)")
+    }
+    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
+        print("Firebase did receive remote push: \(remoteMessage.appData)")
+    }
+}
