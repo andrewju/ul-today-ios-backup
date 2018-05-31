@@ -199,6 +199,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print("did receive remote message: \(userInfo)")
         completionHandler(UIBackgroundFetchResult.newData)
+        
+        if let userInfo = userInfo as? [String: Any] {
+            self.handlePush(userInfo: userInfo, postExcute: true)
+        }
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -230,6 +234,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         let userInfo = notification.request.content.userInfo
         print("did receive remote notification: \(userInfo)")
         
+        if let userInfo = userInfo as? [String: Any] {
+            self.handlePush(userInfo: userInfo, postExcute: false)
+        }
         
         completionHandler([])
     }
@@ -237,7 +244,42 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
         print("did receive remote notification 2: \(userInfo)")
+        
+        if let userInfo = userInfo as? [String: Any] {
+            self.handlePush(userInfo: userInfo, postExcute: false)
+        }
         completionHandler()
+    }
+    
+    func handlePush(userInfo: [String: Any], postExcute: Bool) {
+        if let messageTypeStr =  userInfo[PushCommandKey.messageType.rawValue] as? String {
+            if let messageType = PushMessageType(rawValue: messageTypeStr) {
+                switch messageType {
+                case .news:
+                    if let tabIndexStr = userInfo[PushConfigurationKey.tabIndex.rawValue] as? String,
+                        let badgeStr = userInfo[PushConfigurationKey.badge.rawValue] as? String,
+                        let tabIndex = TabIndex(rawValue: tabIndexStr) {
+                        if let badge = Int(badgeStr) {
+                            if let mainVc = self.window?.rootViewController as? MainViewController {
+                                mainVc.updateBadge(tabIndex: tabIndex, number: badge)
+                            }
+                        }
+                    }
+                    if let link = userInfo[PushConfigurationKey.link.rawValue] as? String, let rootVc = self.window?.rootViewController {
+                        if !postExcute {
+                            WebBrowserVC.openBroswer(rootVc, url: URL(string: link), title: nil, showCloseButton: false)
+                        } else {
+                            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                                WebBrowserVC.openBroswer(rootVc, url: URL(string: link), title: nil, showCloseButton: false)
+                            }
+                        }
+                    }
+                case .emergency:
+                    print("-- todo -- emergency")
+                    break
+                }
+            }
+        }
     }
 }
 

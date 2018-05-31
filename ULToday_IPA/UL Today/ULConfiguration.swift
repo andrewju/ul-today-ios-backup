@@ -26,6 +26,22 @@ enum ULRemoteConfigurationKey: String {
     case serviceInstagram = "service_name_instagram"
 }
 
+enum PushCommandKey: String {
+    case messageType
+}
+
+enum PushMessageType: String {
+    case news
+    case emergency
+}
+enum PushConfigurationKey: String {
+    case link
+    case badge
+    case title
+    case message
+    case tabIndex
+}
+
 class ULConfiguration: NSObject {
     var remoteCofig: RemoteConfig?
     func loadDefaultConfigs() -> Bool {

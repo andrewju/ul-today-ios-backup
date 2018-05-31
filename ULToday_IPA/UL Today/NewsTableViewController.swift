@@ -129,6 +129,13 @@ class NewsTableViewController: UITableViewController, XMLParserDelegate{
         
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if let mainVc = self.tabBarController as? MainViewController {
+            mainVc.clearBadge(tabIndex: .news)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

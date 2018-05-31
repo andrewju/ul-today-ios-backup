@@ -387,6 +387,13 @@ class ClassesTableViewController: UITableViewController {
         super.viewDidLayoutSubviews()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if let mainVc = self.tabBarController as? MainViewController {
+            mainVc.clearBadge(tabIndex: .classes)
+        }
+    }
+    
     override func viewDidLoad() {
         self.tableView.dataSource = self
 
