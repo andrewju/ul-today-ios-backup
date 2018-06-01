@@ -114,6 +114,13 @@ class OthersTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if let mainVc = self.tabBarController as? MainViewController {
+            mainVc.clearBadge(tabIndex: .more)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

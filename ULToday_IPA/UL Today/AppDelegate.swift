@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 import Firebase
 
 @UIApplicationMain
@@ -121,7 +122,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    
+  
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         systemVersion = 2
@@ -173,8 +174,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             self.remoteConfig = config
         }
+ 
+        
+//        FirebaseApp.configure()
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { (granted, error) in
+        }
+        application.registerForRemoteNotifications()
+        Messaging.messaging().delegate = self
         
         return true
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        print("did register remote notification: \(deviceToken)")
+        //Messaging.messaging().apnsToken = deviceToken
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Failed to register remote notification: \(error)")
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        print("did receive remote message: \(userInfo)")
+        completionHandler(UIBackgroundFetchResult.newData)
+        
+        if let userInfo = userInfo as? [String: Any] {
+            self.handlePush(userInfo: userInfo, postExcute: true)
+        }
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -200,3 +228,66 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+// ios 10 message handling
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let userInfo = notification.request.content.userInfo
+        print("did receive remote notification: \(userInfo)")
+        
+        if let userInfo = userInfo as? [String: Any] {
+            self.handlePush(userInfo: userInfo, postExcute: false)
+        }
+        
+        completionHandler([])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        print("did receive remote notification 2: \(userInfo)")
+        
+        if let userInfo = userInfo as? [String: Any] {
+            self.handlePush(userInfo: userInfo, postExcute: false)
+        }
+        completionHandler()
+    }
+    
+    func handlePush(userInfo: [String: Any], postExcute: Bool) {
+        if let messageTypeStr =  userInfo[PushCommandKey.messageType.rawValue] as? String {
+            if let messageType = PushMessageType(rawValue: messageTypeStr) {
+                switch messageType {
+                case .news:
+                    if let tabIndexStr = userInfo[PushConfigurationKey.tabIndex.rawValue] as? String,
+                        let badgeStr = userInfo[PushConfigurationKey.badge.rawValue] as? String,
+                        let tabIndex = TabIndex(rawValue: tabIndexStr) {
+                        if let badge = Int(badgeStr) {
+                            if let mainVc = self.window?.rootViewController as? MainViewController {
+                                mainVc.updateBadge(tabIndex: tabIndex, number: badge)
+                            }
+                        }
+                    }
+                    if let link = userInfo[PushConfigurationKey.link.rawValue] as? String, let rootVc = self.window?.rootViewController {
+                        if !postExcute {
+                            WebBrowserVC.openBroswer(rootVc, url: URL(string: link), title: nil, showCloseButton: false)
+                        } else {
+                            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                                WebBrowserVC.openBroswer(rootVc, url: URL(string: link), title: nil, showCloseButton: false)
+                            }
+                        }
+                    }
+                case .emergency:
+                    print("-- todo -- emergency")
+                    break
+                }
+            }
+        }
+    }
+}
+
+extension AppDelegate: MessagingDelegate {
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        print("Firebase registration token: \(fcmToken)")
+    }
+    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
+        print("Firebase did receive remote push: \(remoteMessage.appData)")
+    }
+}

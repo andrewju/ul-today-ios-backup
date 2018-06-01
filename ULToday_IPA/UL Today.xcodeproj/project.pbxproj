@@ -114,6 +114,7 @@
 		615DA40120B9C43300FD948E /* ULRemoteConfDefaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ULRemoteConfDefaults.plist; sourceTree = "<group>"; };
 		615DA40320B9DA7E00FD948E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		615DA40B20BB012F00FD948E /* WebBrowserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserVC.swift; sourceTree = "<group>"; };
+		6183D69520BF271A00411290 /* UL Today.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "UL Today.entitlements"; sourceTree = "<group>"; };
 		D0BBD3C6A3886969E8FDB0D7 /* Pods-UL Today.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UL Today.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UL Today/Pods-UL Today.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -152,6 +153,7 @@
 		490003FB1D5941D4008639E7 /* UL Today */ = {
 			isa = PBXGroup;
 			children = (
+				6183D69520BF271A00411290 /* UL Today.entitlements */,
 				49B9FEDE1FB10DB100951005 /* Core */,
 				4900040A1D5941D4008639E7 /* Info.plist */,
 				490F83A31E3E1DF10028D87D /* Core */,
@@ -348,6 +350,17 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = KJTFH4D46R;
 						LastSwiftMigration = 0900;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.VPNLite = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -613,6 +626,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "UL Today/UL Today.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = KJTFH4D46R;
@@ -635,6 +649,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "UL Today/UL Today.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = KJTFH4D46R;

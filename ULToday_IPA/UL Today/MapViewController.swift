@@ -19,6 +19,13 @@ class MapViewController: UIViewController {
         super.viewWillAppear(true)
         self.navigationItem.titleView = UIImageView.init(image: UIImage(named:"ul-logo"))
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if let mainVc = self.tabBarController as? MainViewController {
+            mainVc.clearBadge(tabIndex: .map)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

@@ -616,6 +616,12 @@ class HomeViewController: UIViewController {
 //        UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
         WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if let mainVc = self.tabBarController as? MainViewController {
+            mainVc.clearBadge(tabIndex: .home)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
