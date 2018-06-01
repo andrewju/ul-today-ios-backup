@@ -24,6 +24,7 @@ enum ULRemoteConfigurationKey: String {
     case serviceEvents = "service_name_events"
     case serviceTimeTable = "service_name_time_table"
     case serviceInstagram = "service_name_instagram"
+    case serviceBlockMessage = "service_name_block_message" // text to display, string
 }
 
 enum PushCommandKey: String {

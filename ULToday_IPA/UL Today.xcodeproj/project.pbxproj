@@ -51,6 +51,8 @@
 		49F4B4A91D6A0BE9002FB7B1 /* MapTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F4B4A81D6A0BE9002FB7B1 /* MapTableViewController.swift */; };
 		49F4B4AB1D6A1B07002FB7B1 /* MapItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F4B4AA1D6A1B07002FB7B1 /* MapItemTableViewCell.swift */; };
 		49F8BE361D5A8D7A00DBC824 /* ClassesItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F8BE351D5A8D7A00DBC824 /* ClassesItem.swift */; };
+		6141FC0C20C1D36C007EF3F7 /* ServiceUnavailableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6141FC0A20C1D36C007EF3F7 /* ServiceUnavailableVC.swift */; };
+		6141FC0D20C1D36C007EF3F7 /* ServiceUnavailableVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6141FC0B20C1D36C007EF3F7 /* ServiceUnavailableVC.xib */; };
 		615DA3FC20B994F800FD948E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 615DA3FB20B994F800FD948E /* GoogleService-Info.plist */; };
 		615DA3FE20B9C35800FD948E /* ULConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615DA3FD20B9C35800FD948E /* ULConfiguration.swift */; };
 		615DA40220B9C43300FD948E /* ULRemoteConfDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 615DA40120B9C43300FD948E /* ULRemoteConfDefaults.plist */; };
@@ -109,6 +111,8 @@
 		49F8BE351D5A8D7A00DBC824 /* ClassesItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassesItem.swift; sourceTree = "<group>"; };
 		4B8C07AD067E88929CE8E0C9 /* Pods-UL Today.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UL Today.release.xcconfig"; path = "Pods/Target Support Files/Pods-UL Today/Pods-UL Today.release.xcconfig"; sourceTree = "<group>"; };
 		57C82916E27C8F9722320C7D /* Pods_UL_Today.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UL_Today.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6141FC0A20C1D36C007EF3F7 /* ServiceUnavailableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceUnavailableVC.swift; sourceTree = "<group>"; };
+		6141FC0B20C1D36C007EF3F7 /* ServiceUnavailableVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceUnavailableVC.xib; sourceTree = "<group>"; };
 		615DA3FB20B994F800FD948E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "UL Today/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		615DA3FD20B9C35800FD948E /* ULConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ULConfiguration.swift; sourceTree = "<group>"; };
 		615DA40120B9C43300FD948E /* ULRemoteConfDefaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ULRemoteConfDefaults.plist; sourceTree = "<group>"; };
@@ -310,6 +314,8 @@
 				615DA3FD20B9C35800FD948E /* ULConfiguration.swift */,
 				615DA40120B9C43300FD948E /* ULRemoteConfDefaults.plist */,
 				615DA40B20BB012F00FD948E /* WebBrowserVC.swift */,
+				6141FC0A20C1D36C007EF3F7 /* ServiceUnavailableVC.swift */,
+				6141FC0B20C1D36C007EF3F7 /* ServiceUnavailableVC.xib */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -391,6 +397,7 @@
 				4907F1DA1F4B816A0025E0BD /* AppData.json in Resources */,
 				499BB50B1D5C9F4E00F38EE2 /* GaramondBold.ttf in Resources */,
 				490004091D5941D4008639E7 /* LaunchScreen.storyboard in Resources */,
+				6141FC0D20C1D36C007EF3F7 /* ServiceUnavailableVC.xib in Resources */,
 				490004061D5941D4008639E7 /* Assets.xcassets in Resources */,
 				490004041D5941D4008639E7 /* Main.storyboard in Resources */,
 				615DA3FC20B994F800FD948E /* GoogleService-Info.plist in Resources */,
@@ -453,6 +460,7 @@
 				4900041F1D594291008639E7 /* News.swift in Sources */,
 				49F4B4AB1D6A1B07002FB7B1 /* MapItemTableViewCell.swift in Sources */,
 				49C62FFF1D6CCECA007AA52B /* UsefulInformation.swift in Sources */,
+				6141FC0C20C1D36C007EF3F7 /* ServiceUnavailableVC.swift in Sources */,
 				494FD2A81D61119000FB0066 /* TwitterItem.swift in Sources */,
 				49B9FED71FB10DA800951005 /* ActivityIndicator.swift in Sources */,
 				615DA40420B9DA7E00FD948E /* MainViewController.swift in Sources */,

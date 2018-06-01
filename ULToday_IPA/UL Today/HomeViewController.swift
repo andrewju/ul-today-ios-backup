@@ -197,7 +197,10 @@ class HomeViewController: UIViewController {
                         
                         self.homeLabel = text + "\n\n- source: www.ulsport.ie\n(*Bank holiday hour)"
                         let days2 = json["days2"]! as! [String]
-                        self.homeLabel2 = days2[day] + "\n\n- source: www.ulsport.ie"
+                        
+                        let splitedArr = days2[day].components(separatedBy: "(")
+                        let str = splitedArr.joined(separator: "\n(")
+                        self.homeLabel2 = str + "\n\n- source: www.ulsport.ie"
                     }
                     
                     DispatchQueue.main.async {
@@ -264,7 +267,7 @@ class HomeViewController: UIViewController {
                             
                         }
                         self.homeFeatureSlideShow.setImageInputs(self.afNetworkingSource)
-                        self.featureNewsTitle.text = self.featureNewsList[0].title.uppercased()
+                        self.featureNewsTitle.text = self.featureNewsList[0].title
                         let recognizer = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.didTap))
                         self.homeFeatureSlideShow.addGestureRecognizer(recognizer)
                     }
@@ -510,18 +513,18 @@ class HomeViewController: UIViewController {
         
         let number1:UIAlertAction = UIAlertAction(title: "Campus Secuirty #1", style: .default) { UIAlertAction in
             let phoneURL = URL(string: numbers[1])
-//            UIApplication.shared.open(phoneURL!, options: [:], completionHandler: nil)
-            WebBrowserVC.openBroswer(self, url: phoneURL, title: nil, showCloseButton: true)
+            UIApplication.shared.open(phoneURL!, options: [:], completionHandler: nil)
+//            WebBrowserVC.openBroswer(self, url: phoneURL, title: nil, showCloseButton: true)
         }
         let number2:UIAlertAction = UIAlertAction(title: "Campus Secuirty #2", style: .default) { UIAlertAction in
             let phoneURL = URL(string: numbers[2])
-//            UIApplication.shared.open(phoneURL!, options: [:], completionHandler: nil)
-            WebBrowserVC.openBroswer(self, url: phoneURL, title: nil, showCloseButton: true)
+            UIApplication.shared.open(phoneURL!, options: [:], completionHandler: nil)
+//            WebBrowserVC.openBroswer(self, url: phoneURL, title: nil, showCloseButton: true)
         }
         let number3:UIAlertAction = UIAlertAction(title: "UL Reception", style: .default) { UIAlertAction in
             let phoneURL = URL(string: numbers[4])
-//            UIApplication.shared.open(phoneURL!, options: [:], completionHandler: nil)
-            WebBrowserVC.openBroswer(self, url: phoneURL, title: nil, showCloseButton: true)
+            UIApplication.shared.open(phoneURL!, options: [:], completionHandler: nil)
+//            WebBrowserVC.openBroswer(self, url: phoneURL, title: nil, showCloseButton: true)
         }
         
         callList.addAction(number1)
@@ -686,7 +689,7 @@ class HomeViewController: UIViewController {
         // optional way to show activity indicator during image load (skipping the line will show no activity indicator)
         homeFeatureSlideShow.activityIndicator = DefaultActivityIndicator()
         homeFeatureSlideShow.currentPageChanged = { page in
-            self.featureNewsTitle.text = self.featureNewsList[page].title.uppercased()
+            self.featureNewsTitle.text = self.featureNewsList[page].title
         }
         
         instagramPhotosSlideShow.backgroundColor = UIColor.white

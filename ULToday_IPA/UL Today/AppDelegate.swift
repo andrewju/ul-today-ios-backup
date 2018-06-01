@@ -14,7 +14,7 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    var systemVersion: Int?
+    var systemVersion: Int = 0
     var serverResponse: Int?
     var serverVersion: Int?
     
@@ -63,14 +63,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String:AnyObject]
                     
                     self.serverVersion = (json["baseversion"]! as! Int);
+                    if let latestNewsStr = json["latestNewsDate"] as? String {
+                        let userDefault = UserDefaults.standard
+                        let lastCheckedDateKey = "ULTodayLastNewsDate"
+                        
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssXXX"
                     
-                    if(self.serverVersion! > self.systemVersion!) { // force upgrade
-                        DispatchQueue.main.async{
-                            let alert = UIAlertController(title: nil, message: "Your app version is out-of-date!\nPlease update to the latest version from App Store.!", preferredStyle: UIAlertControllerStyle.alert)
-                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction) in Thread.sleep(forTimeInterval: 0.5); exit(0)}))
-                            self.window?.rootViewController?.present(alert, animated: true, completion: nil)                }
-                    } else { // perfect
-                        //let tabBarController = self.window?.rootViewController as? UITabBarController
+                        if let lastCheckedDateStr = userDefault.string(forKey: lastCheckedDateKey),
+                            let serverNewsDate = dateFormatter.date(from: latestNewsStr), let lastCheckedDate = dateFormatter.date(from: lastCheckedDateStr) {
+                            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
+                                if lastCheckedDate < serverNewsDate, let mainVc = self.window?.rootViewController as? MainViewController {
+                                    mainVc.updateBadge(tabIndex: .news, badgeValue: "new")
+                                }
+                                userDefault.set(latestNewsStr, forKey: lastCheckedDateKey)
+                                userDefault.synchronize()
+                            })
+                        }
                     }
                 } catch {
                     print("error serializing JSON: \(error)")
@@ -125,8 +134,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        systemVersion = 2
-        requestControl()
+        systemVersion = 5
+        
         self.window = UIWindow(frame: UIScreen.main.bounds)
         swipeGestureLeft = UISwipeGestureRecognizer(target: self, action: #selector(AppDelegate.swipwView(_:)))
         swipeGestureLeft.direction = .left
@@ -161,12 +170,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             config.fetchRemoteConfigs(TimeInterval(5)) { (status, error) in
                 if status == .success {
                     // more operations
+                    if let miniVersion = config.getNumber(ULRemoteConfigurationKey.miniAppVersion.rawValue) {
+                        if miniVersion.intValue > self.systemVersion {
+                            DispatchQueue.main.async{
+                                let alert = UIAlertController(title: nil, message: "Your app version is out-of-date!\nPlease update to the latest version from App Store.!", preferredStyle: UIAlertControllerStyle.alert)
+                                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction) in Thread.sleep(forTimeInterval: 0.5); exit(0)}))
+                                self.window?.rootViewController?.present(alert, animated: true, completion: nil)
+                            }
+                        }
+                    }
                     if (NSKeyedUnarchiver.unarchiveObject(withFile: UserInfo.ArchiveURL.path) as? UserInfo) != nil {
                         if config.getBool(ULRemoteConfigurationKey.exameFeature.rawValue) {
                             self.mainVc?.showClassTab(true, animated: false)
                         } else {
                             self.mainVc?.showClassTab(false, animated: false)
                         }
+                    }
+                    if let blockMessage = config.getString(ULRemoteConfigurationKey.serviceBlockMessage.rawValue), blockMessage.lengthOfBytes(using: .utf8) > 0 {
+                        let serviceUnavailableVc = ServiceUnavailableVC(nibName: "ServiceUnavailableVC", bundle: nil)
+                        serviceUnavailableVc.strMessage = blockMessage
+                        self.window?.rootViewController?.present(serviceUnavailableVc, animated: true, completion: nil)
                     }
                 } else {
                     // more error handling
@@ -184,6 +207,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
         Messaging.messaging().delegate = self
         
+        
+        requestControl()
         return true
     }
     

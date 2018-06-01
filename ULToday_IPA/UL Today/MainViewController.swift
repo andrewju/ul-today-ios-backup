@@ -53,49 +53,33 @@ class MainViewController: UITabBarController {
             self.showingClassTab = false
         }
     }
-    
-    func updateBadge(tabIndex: TabIndex, number: Int) {
+    func updateBadge(tabIndex: TabIndex, badgeValue: String?) {
         switch tabIndex {
         case .home:
-            if number > 0 {
-                self.tabBar.items?[0].badgeValue = "\(number)"
-            } else {
-                self.tabBar.items?[0].badgeValue = nil
-            }
+           self.tabBar.items?[0].badgeValue = badgeValue
         case .news:
-            if number > 0 {
-                self.tabBar.items?[1].badgeValue = "\(number)"
-            } else {
-                self.tabBar.items?[1].badgeValue = nil
-            }
+            self.tabBar.items?[1].badgeValue = badgeValue
         case .classes:
             if showingClassTab {
-                if number > 0 {
-                    self.tabBar.items?[2].badgeValue = "\(number)"
-                } else {
-                    self.tabBar.items?[2].badgeValue = nil
-                }
+                self.tabBar.items?[2].badgeValue = badgeValue
             }
         case .map:
             if showingClassTab {
-                if number > 0 {
-                    self.tabBar.items?[3].badgeValue = "\(number)"
-                } else {
-                    self.tabBar.items?[3].badgeValue = nil
-                }
+                self.tabBar.items?[3].badgeValue = badgeValue
+                
             } else {
-                if number > 0 {
-                    self.tabBar.items?[2].badgeValue = "\(number)"
-                } else {
-                    self.tabBar.items?[2].badgeValue = nil
-                }
+                self.tabBar.items?[2].badgeValue = badgeValue
             }
         case .more:
-            if number > 0 {
-                self.tabBar.items?.last?.badgeValue = "\(number)"
-            } else {
-                self.tabBar.items?.last?.badgeValue = nil
-            }
+            self.tabBar.items?.last?.badgeValue = badgeValue
+        }
+    }
+    
+    func updateBadge(tabIndex: TabIndex, number: Int) {
+        if number > 0 {
+            self.updateBadge(tabIndex: tabIndex, badgeValue: "\(number)")
+        } else {
+            self.updateBadge(tabIndex: tabIndex, badgeValue: nil)
         }
     }
     
