@@ -510,15 +510,18 @@ class HomeViewController: UIViewController {
         
         let number1:UIAlertAction = UIAlertAction(title: "Campus Secuirty #1", style: .default) { UIAlertAction in
             let phoneURL = URL(string: numbers[1])
-            UIApplication.shared.open(phoneURL!, options: [:], completionHandler: nil)
+//            UIApplication.shared.open(phoneURL!, options: [:], completionHandler: nil)
+            WebBrowserVC.openBroswer(self, url: phoneURL, title: nil, showCloseButton: true)
         }
         let number2:UIAlertAction = UIAlertAction(title: "Campus Secuirty #2", style: .default) { UIAlertAction in
             let phoneURL = URL(string: numbers[2])
-            UIApplication.shared.open(phoneURL!, options: [:], completionHandler: nil)
+//            UIApplication.shared.open(phoneURL!, options: [:], completionHandler: nil)
+            WebBrowserVC.openBroswer(self, url: phoneURL, title: nil, showCloseButton: true)
         }
         let number3:UIAlertAction = UIAlertAction(title: "UL Reception", style: .default) { UIAlertAction in
             let phoneURL = URL(string: numbers[4])
-            UIApplication.shared.open(phoneURL!, options: [:], completionHandler: nil)
+//            UIApplication.shared.open(phoneURL!, options: [:], completionHandler: nil)
+            WebBrowserVC.openBroswer(self, url: phoneURL, title: nil, showCloseButton: true)
         }
         
         callList.addAction(number1)
@@ -577,19 +580,24 @@ class HomeViewController: UIViewController {
 
         if(self.infoSlideShow.currentPage == 0) {
             let linkURL = URL(string: "https://www.ul.ie/alerts/")
-            UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+//            UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+            WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
         } else if(self.infoSlideShow.currentPage == 1) {
             let linkURL = URL(string: "https://www.ul.ie/library/about/opening-hours")
-            UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+//            UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+            WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
         } else if(self.infoSlideShow.currentPage == 2) {
             let linkURL = URL(string: "https://www.omahonys.ie/v2/r_info.php?p=contact_ul")
-            UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+//            UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+            WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
         } else if(self.infoSlideShow.currentPage == 3) {
             let linkURL = URL(string: "http://www.ulsport.ie/ularena/opening-hours/")
-            UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+//            UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+            WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
         } else if(self.infoSlideShow.currentPage == 4) {
             let linkURL = URL(string: "http://www.ulsport.ie/ularena/opening-hours/")
-            UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+//            UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+            WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
         }
     }
     
@@ -597,14 +605,16 @@ class HomeViewController: UIViewController {
         
         let urlEncoded = self.instagramList[instagramPhotosSlideShow.currentPage].link.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         let linkURL = URL(string: urlEncoded!)
-        UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+//        UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+        WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
     }
     
     @objc func didTap() {
         
         let urlEncoded = self.featureNewsList[homeFeatureSlideShow.currentPage].link.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         let linkURL = URL(string: urlEncoded!)
-        UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+//        UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+        WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
     }
     
     override func viewDidLoad() {

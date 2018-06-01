@@ -114,6 +114,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate
         }
         
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//        WebBrowserVC.openBroswer(self, url: url, title: nil, showCloseButton: true)
     }
     // MARK: - location manager delegate
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

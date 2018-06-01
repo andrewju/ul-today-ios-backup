@@ -19,23 +19,35 @@ class OpeningHours: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch  (indexPath as NSIndexPath).row {
         case 0:
-            let linkURL = URL(string: AppData.shared.first7Weeks[0])
-            UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+            if let linkURL = URL(string: AppData.shared.first7Weeks[0]) {
+//            UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+                WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
+            }
         case 1:
-            let linkURL = URL(string: AppData.shared.first7Weeks[1])
-            UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+            if let linkURL = URL(string: AppData.shared.first7Weeks[1]) {
+//                UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+                WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
+            }
         case 2:
-            let linkURL = URL(string: AppData.shared.first7Weeks[2])
-            UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+            if let linkURL = URL(string: AppData.shared.first7Weeks[2]) {
+            UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
+//                WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
+            }
         case 3:
-            let linkURL = URL(string: AppData.shared.first7Weeks[3])
-            UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+            if let linkURL = URL(string: AppData.shared.first7Weeks[3]) {
+            UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
+//                WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
+            }
         case 4:
-            let linkURL = URL(string: AppData.shared.first7Weeks[4])
-            UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+            if let linkURL = URL(string: AppData.shared.first7Weeks[4]) {
+            UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
+//                WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
+            }
         default:
-            let linkURL = URL(string: AppData.shared.defaultURL!)
-            UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+            if let linkURL = URL(string: AppData.shared.defaultURL!) {
+            UIApplication.shared.open(linkURL, options: [:], completionHandler: nil)
+//                WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
+            }
         }
         
         tableView.deselectRow(at: indexPath, animated: true)

@@ -667,7 +667,8 @@ class ClassesTableViewController: UITableViewController {
         //        let title = result["name"] as! NSString
         let url = String(format: "http://maps.apple.com/?ll=%@,%@&z=15&q=%@", loc.components(separatedBy: ",")[0].trimmingCharacters(in: CharacterSet.whitespacesAndNewlines), loc.components(separatedBy: ",")[1].trimmingCharacters(in: CharacterSet.whitespacesAndNewlines), title.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).replacingOccurrences(of: " ", with: "+"))
         let linkURL = URL(string: url)
-        UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+//        UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+        WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

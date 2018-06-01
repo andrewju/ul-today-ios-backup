@@ -55,6 +55,7 @@
 		615DA3FE20B9C35800FD948E /* ULConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615DA3FD20B9C35800FD948E /* ULConfiguration.swift */; };
 		615DA40220B9C43300FD948E /* ULRemoteConfDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 615DA40120B9C43300FD948E /* ULRemoteConfDefaults.plist */; };
 		615DA40420B9DA7E00FD948E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615DA40320B9DA7E00FD948E /* MainViewController.swift */; };
+		615DA40C20BB012F00FD948E /* WebBrowserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615DA40B20BB012F00FD948E /* WebBrowserVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,6 +113,7 @@
 		615DA3FD20B9C35800FD948E /* ULConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ULConfiguration.swift; sourceTree = "<group>"; };
 		615DA40120B9C43300FD948E /* ULRemoteConfDefaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ULRemoteConfDefaults.plist; sourceTree = "<group>"; };
 		615DA40320B9DA7E00FD948E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		615DA40B20BB012F00FD948E /* WebBrowserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserVC.swift; sourceTree = "<group>"; };
 		D0BBD3C6A3886969E8FDB0D7 /* Pods-UL Today.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UL Today.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UL Today/Pods-UL Today.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -305,6 +307,7 @@
 				49B9FED31FB10DA700951005 /* ZoomAnimatedTransitioning.swift */,
 				615DA3FD20B9C35800FD948E /* ULConfiguration.swift */,
 				615DA40120B9C43300FD948E /* ULRemoteConfDefaults.plist */,
+				615DA40B20BB012F00FD948E /* WebBrowserVC.swift */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -441,6 +444,7 @@
 				49B9FED71FB10DA800951005 /* ActivityIndicator.swift in Sources */,
 				615DA40420B9DA7E00FD948E /* MainViewController.swift in Sources */,
 				4907F1D61F4B2C2A0025E0BD /* AppData.swift in Sources */,
+				615DA40C20BB012F00FD948E /* WebBrowserVC.swift in Sources */,
 				49B9FEDA1FB10DA800951005 /* UIImageView+Tools.swift in Sources */,
 				49F8BE361D5A8D7A00DBC824 /* ClassesItem.swift in Sources */,
 				615DA3FE20B9C35800FD948E /* ULConfiguration.swift in Sources */,
@@ -613,7 +617,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = KJTFH4D46R;
 				INFOPLIST_FILE = "UL Today/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ie.ul.andrew.UL-Today-App";
 				PRODUCT_NAME = "UL Today";
@@ -635,7 +639,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = KJTFH4D46R;
 				INFOPLIST_FILE = "UL Today/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ie.ul.andrew.UL-Today-App";
 				PRODUCT_NAME = "UL Today";

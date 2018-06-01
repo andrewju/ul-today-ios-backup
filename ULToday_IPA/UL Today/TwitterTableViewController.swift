@@ -193,7 +193,8 @@ class TwitterTableViewController: UITableViewController {
         let tweet = tweetsLit[(indexPath as NSIndexPath).row]
         let urlEncoded = tweet.link.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         let linkURL = URL(string: urlEncoded!)
-        UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+//        UIApplication.shared.open(linkURL!, options: [:], completionHandler: nil)
+        WebBrowserVC.openBroswer(self, url: linkURL, title: nil, showCloseButton: true)
         
         tableView.deselectRow(at: indexPath, animated: true)
         
